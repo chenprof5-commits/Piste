@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#fff0f4">
+    <meta name="description" content="Un jeu de piste imaginé spécialement pour Épiphanie.">
+    <title>Le jeu de piste d’Épiphanie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main id="app" class="app-shell" aria-live="polite"></main>
+    <form name="reponse-question" method="POST" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="reponse-question">
+      <input type="hidden" name="reponse">
+      <input type="hidden" name="subject" value="Réponse à la question d’Épiphanie">
+    </form>
+    <script src="script.js" defer></script>
+  </body>
+</html>
