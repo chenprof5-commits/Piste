@@ -92,8 +92,10 @@ function mapMarkup() {
     const number = index + 1;
     const complete = number <= progress.completed;
     const open = number === progress.completed + 1;
-    const className = `level-node ${complete ? 'done' : ''} ${open ? 'unlocked current' : open ? 'unlocked' : ''}`;
-    return `<button class="${className}" style="--node-index:${index}" data-level="${number}" ${open ? `aria-label="Commencer le niveau ${number}"` : `aria-label="Niveau ${number}${complete ? ', terminé' : ', verrouillé'}"`} ${open ? '' : 'disabled'}>${number}</button>`;
+    const available = number <= progress.completed + 1;
+    const className = `level-node ${complete ? 'done' : ''} ${open ? 'unlocked current' : ''}`;
+    const label = complete ? `Revoir le niveau ${number}, terminé` : open ? `Commencer le niveau ${number}` : `Niveau ${number}, verrouillé`;
+    return `<button type="button" class="${className}" style="--node-index:${index}" data-level="${number}" aria-label="${label}" ${available ? '' : 'disabled'}>${number}</button>`;
   }).join('');
   return `<div class="trail" aria-label="Parcours des ${levels.length} niveaux"><svg class="trail-heart" viewBox="0 0 390 900" preserveAspectRatio="none" aria-hidden="true"><path d="M195 820 C155 755 25 630 25 455 C25 330 115 270 195 370 C275 270 365 330 365 455 C365 630 235 755 195 820 Z" /></svg><svg class="trail-line" viewBox="0 0 390 900" preserveAspectRatio="none" aria-hidden="true"><path d="M195 10 C340 25 60 70 195 95 S330 145 195 175 S55 220 195 250 S335 295 195 325 S55 370 195 400 S335 445 195 475 S55 520 195 550 S335 595 195 625 S55 670 195 700 S335 745 195 775 S55 820 195 850 S280 875 195 890" /></svg>${nodes}</div>`;
 }
@@ -142,11 +144,12 @@ function showToast(message) {
 }
 
 app.addEventListener('click', event => {
-  const button = event.target.closest('[data-action], [data-level]');
+  const button = event.composedPath().find(element => element instanceof HTMLButtonElement && (element.hasAttribute('data-action') || element.hasAttribute('data-level')));
   if (!button) return;
   if (button.hasAttribute('data-level')) {
+    event.preventDefault();
     const number = Number(button.dataset.level);
-    if (number === progress.completed + 1) showLevel(number);
+    if (number <= progress.completed + 1) showLevel(number);
     return;
   }
   const action = button.dataset.action;

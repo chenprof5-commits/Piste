@@ -173,7 +173,8 @@ body::before {
 .btn-primary { background: linear-gradient(135deg, #95536f, #713b56); box-shadow: 0 5px 0 #5d3045, 0 10px 24px #793e592b; }
 .btn-primary:hover { background: linear-gradient(135deg, #a45f7c, #80445f); }
 .btn-soft { background: #f7e8eecc; color: var(--green-dark); }
-.btn:active, .level-node.unlocked:active { transform: scale(.97); }
+.btn:active { transform: translateY(0) scale(.97); }
+.level-node.unlocked:active { scale: .97; }
 .progress-wrap { background: #ffffff82; }
 .progress-track { background: #efdfe5; }
 .progress-fill { background: linear-gradient(90deg, #c36a89, #8c4c69); }
@@ -186,7 +187,9 @@ body::before {
 .level-node { width: 58px; height: 58px; border-color: #fffafce8; background: #eee6e9; box-shadow: 0 7px 18px #74495b21, inset 0 1px 0 #fff; transition: transform .2s, box-shadow .2s, background .2s; animation: node-arrive .45s both; animation-delay: calc(var(--node-index, 0) * 55ms); }
 .level-node.unlocked { border-color: #fff; background: linear-gradient(145deg, #ffe8c0, #f1c8d5); box-shadow: 0 7px 18px #8f5e3b26, inset 0 1px 0 #fff; color: #684b4d; }
 .level-node.current { background: linear-gradient(145deg, #df88a1, #bd5879); box-shadow: 0 0 0 7px #d77c9626, 0 8px 22px #94435e40, inset 0 1px 0 #ffffff85; animation: node-arrive .45s both, current-pulse 2.6s 0.45s ease-in-out infinite; }
-.level-node.done { background: linear-gradient(145deg, #a76782, #76405b); box-shadow: 0 7px 18px #74495b2b, inset 0 1px 0 #ffffff45; }
+.level-node.done { background: linear-gradient(145deg, #a76782, #76405b); box-shadow: 0 7px 18px #74495b2b, inset 0 1px 0 #ffffff45; cursor: pointer; }
+.trail-heart, .trail-line { z-index: 0; }
+.level-node { z-index: 1; pointer-events: auto; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .map-legend { gap: 17px; }
 .modal-backdrop { background: #432a3b70; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .answer-input { min-height: 54px; border-color: #e9d6df; border-radius: 16px; background: #ffffffc7; font-size: 16px; }
